@@ -162,3 +162,19 @@ img {
   }
 }
 
+#summary-section-1 {
+  .course-description {
+    background-color: hsla(210, 4%, 97%, 1);
+    color: grey;
+    text-align: justify;
+    border-radius: 4px;
+    min-height: 50vh;
+    max-width: 512px;
+    padding: 32px;
+    margin: 32px auto;
+  }
+}
+
+#summary-section-2 {
+  background-color: $main-color;
+}

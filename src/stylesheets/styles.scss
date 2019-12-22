@@ -26,6 +26,14 @@ html {
   height: 100%;
 }
 
+.nobr {
+  white-space: nowrap;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
 footer.copyright {
   background-color: rgb(245, 245, 245);
 }
@@ -64,25 +72,21 @@ header {
     }
   }
 
-  @include tablet {
+  @include desktop {
+    height: $header-height;
+
     .level-right .level-item:not(:last-child) {
       margin-right: 64px;
     }
 
     a {
-      font-size: 16px;
+      font-size: 24px;
     }
   }
 
-  @include desktop {
-    height: $header-height;
-
+  @include widescreen {
     .level-right .level-item:not(:last-child) {
       margin-right: 150px;
-    }
-
-    a {
-      font-size: 24px;
     }
   }
 }
@@ -98,6 +102,9 @@ a.has-text-black {
 }
 
 section {
+  padding-top: 32px;
+  padding-bottom: 32px;
+
   @include mobile {
     .container {
       padding: 0 32px !important;
@@ -119,13 +126,20 @@ section {
   }
 
   &.first {
-    margin-top: $header-height;
+    @include touch {
+      margin-top: $touch-header-height;
+    }
+
+    @include desktop {
+      margin-top: $header-height;
+    }
   }
 }
 
 @include mobile {
   img {
-    max-height: 256px;
+    max-height: 420px;
+    max-width: 256px;
   }
 }
 
@@ -218,7 +232,7 @@ img {
   }
 }
 
-@include touch {
+@include mobile {
   .level-right .level-item:not(:last-child) {
     margin-right: 0 !important;
   }
@@ -239,18 +253,18 @@ img {
     font-family: 'Catamaran', sans-serif;
   }
 
-  @include tablet {
+  @include touch {
     .lead-title {
       line-height: 1em;
-      font-size: 24px;
-      margin-bottom: 70px;
+      font-size: 48px;
+      margin-bottom: 16px;
     }
   }
 
   @include desktop {
     .lead-title {
       line-height: 1em;
-      font-size: 13vh;
+      font-size: 6vw;
       margin-bottom: 70px;
     }
   }
@@ -266,8 +280,21 @@ img {
   }
 
   p {
-    font-size: 24px;
     color: white;
+
+    @include tablet-only {
+      font-size: 16px;
+      text-align: justify;
+      text-align-last: center;
+    }
+
+    @include desktop-only {
+      font-size: 20px;
+    }
+
+    @include widescreen {
+      font-size: 24px;
+    }
   }
 }
 
@@ -277,8 +304,6 @@ img {
     line-height: 1.25em;
     margin-bottom: 2rem;
   }
-
-  padding-bottom: 32px;
 }
 
 #section-4 {
@@ -292,7 +317,6 @@ img {
 
   @include tablet {
     .title {
-      width: 50%;
       font-size: 64px !important;
     }
   }
@@ -308,8 +332,11 @@ img {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 400px;
     margin-top: 32px;
+
+    @include desktop {
+      max-width: 400px;
+    }
 
     > * {
       display: block;

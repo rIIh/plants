@@ -2,7 +2,7 @@
   "name": "plants",
   "description": "Educational plants site",
   "version": "0.1.0",
-  "homepage": "http://plants.rathive.tk",
+  "homepage": "http://riih.github.io/plants",
   "author": {
     "name": "riih",
     "url": "http://rathive.tk"
@@ -26,7 +26,9 @@
     "lint:js": "./node_modules/.bin/eslint \"src/**/*.js\"",
     "lint:styles": "stylelint \"src/**/*.scss\"",
     "build:dist": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.js",
-    "deploy": "node ./config/site.deploy.js"
+    "deploy": "node ./config/site.deploy.js",
+    "predeploy": "npm run build:dist",
+    "gh-deploy": "gh-pages -d dist"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -44,6 +46,7 @@
     "eslint-loader": "^2.2.1",
     "eslint-plugin-import": "^2.18.2",
     "file-loader": "^4.2.0",
+    "gh-pages": "^2.1.1",
     "glob": "^7.1.4",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^4.0.0-beta.8",

@@ -1,8 +1,16 @@
 // Load CSS Reset from NPM
 @import '~normalize.css';
+@import url('https://fonts.googleapis.com/css?family=Abril+Fatface|Vidaloka|Open+Sans+Condensed:300|Catamaran:800&display=swap');
 
-$header-height: 64px;
 $main-color: #66cca5;
+$secondary-color: #dcf2ec;
+$footer-background-color: white;
+$footer-padding: 3rem 1.5rem;
+
+$header-height: 128px;
+$touch-header-height: 64px;
+
+$border-radius: 4px;
 
 @import '~bulma/bulma';
 
@@ -10,27 +18,72 @@ $main-color: #66cca5;
   $column-gap: 0.5rem;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
+.fill-height {
+  height: 100%;
+}
+
+footer.copyright {
+  background-color: rgb(245, 245, 245);
+}
+
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1,
+h2,
+.brand-logo {
+  font-family: 'Catamaran', 'Abril Fatface', 'Vidaloka', 'Arial', sans-serif;
+  color: black;
+}
+
+.brand-logo {
+  font-size: 32px;
+  font-weight: 100;
+}
+
 header {
   position: fixed;
   width: 100%;
-  height: $header-height;
+  top: 0;
   background-color: white;
   z-index: 100;
-  padding: 0 64px;
+  padding: 0 96px;
 
-  .level-right .level-item:not(:last-child) {
-    margin-right: 50px;
+  @include touch {
+    height: $touch-header-height;
   }
 
-  .level-right {
-    @include mobile {
+  @include mobile {
+    .level-right {
       display: none;
     }
   }
 
-  a {
-    font-size: 24px;
-    font-weight: 100;
+  @include tablet {
+    .level-right .level-item:not(:last-child) {
+      margin-right: 64px;
+    }
+
+    a {
+      font-size: 16px;
+    }
+  }
+
+  @include desktop {
+    height: $header-height;
+
+    .level-right .level-item:not(:last-child) {
+      margin-right: 150px;
+    }
+
+    a {
+      font-size: 24px;
+    }
   }
 }
 
@@ -38,8 +91,48 @@ a {
   color: $main-color;
 }
 
+a.has-text-black {
+  &:hover {
+    color: grey !important;
+  }
+}
+
 section {
-  padding-top: $header-height;
+  @include mobile {
+    .container {
+      padding: 0 32px !important;
+    }
+  }
+
+  @include touch {
+    min-height: calc(100vh - #{$touch-header-height}) !important;
+  }
+
+  @include tablet {
+    .container {
+      padding: 0 96px !important;
+    }
+  }
+
+  @include desktop {
+    min-height: calc(100vh - #{$header-height}) !important;
+  }
+
+  &.first {
+    margin-top: $header-height;
+  }
+}
+
+@include mobile {
+  img {
+    max-height: 256px;
+  }
+}
+
+@include touch {
+  img {
+    max-height: 512px;
+  }
 }
 
 h1.title {
@@ -54,7 +147,7 @@ h1.title {
   }
 
   @include desktop {
-    font-size: 48px;
+    font-size: 64px;
   }
 }
 
@@ -72,18 +165,28 @@ h2.subtitle {
   }
 }
 
-button {
+button.btn {
   background-color: $main-color;
   border: none;
   color: white;
-  min-width: 150px;
-  min-height: 48px;
-  font-size: 24px;
-  font-weight: 100;
-  border-radius: 4px;
+  border-radius: $border-radius;
   transition-property: color, transform, background-color;
   transition-duration: 200ms;
+  padding-left: 16px;
+  padding-right: 16px;
   cursor: pointer;
+
+  @include touch {
+    min-width: 100px;
+    min-height: 32px;
+    font-size: 14px;
+  }
+
+  @include desktop {
+    min-width: 150px;
+    min-height: 48px;
+    font-size: 20px;
+  }
 
   &:hover {
     background-color: white;
@@ -104,42 +207,68 @@ img {
   max-height: 100%;
 }
 
-.fill-height {
-  height: 100%;
-}
-
 .columns.is-reverse-mobile {
   @include mobile {
     flex-direction: column-reverse;
-    display: flex;  // .is-mobile gives this too
+    display: flex;
+
     .column {
-      // we want width to be 100%, this gives us the power of flex's ordering.
-      // ux behavior is same as before, except underneath the hood width fills
-      // 100% of the column instead of dropping flex in mobile
       width: 100%;
     }
   }
 }
 
-@media screen and (max-width: $tablet) {
+@include touch {
   .level-right .level-item:not(:last-child) {
     margin-right: 0 !important;
   }
 }
 
-.brand-logo {
-  fill: $main-color;
-  height: 48px !important;
+.text-box {
+  background-color: hsla(210, 4%, 97%, 1);
+  color: grey;
+  text-align: justify;
+  border-radius: $border-radius;
+  min-height: 32px;
+  padding: 32px;
+  margin: 32px auto;
 }
 
 #section-1 {
-  .primary-button {
-    margin-top: 32px;
+  .lead-title {
+    font-family: 'Catamaran', sans-serif;
+  }
+
+  @include tablet {
+    .lead-title {
+      line-height: 1em;
+      font-size: 24px;
+      margin-bottom: 70px;
+    }
+  }
+
+  @include desktop {
+    .lead-title {
+      line-height: 1em;
+      font-size: 13vh;
+      margin-bottom: 70px;
+    }
   }
 }
 
 #section-2 {
-  background-color: #dcf2ec;
+  background-color: $main-color;
+
+  h1 {
+    font-size: 48px;
+    margin-bottom: 32px;
+    color: white;
+  }
+
+  p {
+    font-size: 24px;
+    color: white;
+  }
 }
 
 #section-3 {
@@ -148,33 +277,76 @@ img {
     line-height: 1.25em;
     margin-bottom: 2rem;
   }
+
+  padding-bottom: 32px;
 }
 
-@include mobile {
-  img {
-    max-height: 256px;
-  }
-}
-
-@include until($tablet) {
-  img {
-    max-height: 512px;
-  }
-}
-
-#summary-section-1 {
-  .course-description {
-    background-color: hsla(210, 4%, 97%, 1);
-    color: grey;
-    text-align: justify;
-    border-radius: 4px;
-    min-height: 50vh;
-    max-width: 512px;
-    padding: 32px;
-    margin: 32px auto;
-  }
-}
-
-#summary-section-2 {
+#section-4 {
   background-color: $main-color;
+
+  @include mobile {
+    .title {
+      font-size: 32px !important;
+    }
+  }
+
+  @include tablet {
+    .title {
+      width: 50%;
+      font-size: 64px !important;
+    }
+  }
+
+  @include desktop {
+    .title {
+      width: 50%;
+      font-size: 96px !important;
+    }
+  }
+
+  #enroll-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    margin-top: 32px;
+
+    > * {
+      display: block;
+      margin: 8px 0;
+    }
+
+    input,
+    button {
+      min-height: 0;
+      height: 32px;
+      font-size: 14px;
+    }
+
+    input {
+      padding-left: 10px;
+      width: 100%;
+      background-color: transparent;
+      border: 1px white solid;
+      border-radius: $border-radius;
+      color: white;
+      outline: none;
+
+      &::placeholder {
+        color: white;
+      }
+    }
+
+    button {
+      background-color: white;
+      color: $main-color;
+      min-width: 0;
+
+      &:hover {
+        border: white solid 1px;
+        background-color: $main-color;
+        color: white;
+      }
+    }
+  }
 }

@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: http://plants.rathive.tk//sitemap.xml
+Host: plants.rathive.tk

@@ -72,11 +72,17 @@ header {
     }
   }
 
+  @include tablet {
+    .level-right .level-item:not(:last-child) {
+      margin-right: 64px;
+    }
+  }
+
   @include desktop {
     height: $header-height;
 
     .level-right .level-item:not(:last-child) {
-      margin-right: 64px;
+      margin-right: 100px;
     }
 
     a {
@@ -106,7 +112,7 @@ section {
   padding-bottom: 32px;
 
   @include mobile {
-    .container {
+    .container:not(.is-paddingless) {
       padding: 0 32px !important;
     }
   }
@@ -116,7 +122,7 @@ section {
   }
 
   @include tablet {
-    .container {
+    .container:not(.is-paddingless) {
       padding: 0 96px !important;
     }
   }
@@ -264,7 +270,7 @@ img {
   @include desktop {
     .lead-title {
       line-height: 1em;
-      font-size: 6vw;
+      font-size: 5.5vw;
       margin-bottom: 70px;
     }
   }

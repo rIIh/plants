@@ -15,9 +15,14 @@ $(window).bind('resize', () => {
 });
 
 $('a').click(function handle(e) {
-  e.preventDefault();
   const elementClick = $(this).attr('href');
+  if (!elementClick.startsWith('#')) {
+    return true;
+  }
+
+  e.preventDefault();
   const destination = $(elementClick).offset().top - headerHeight;
+
   $('html, body').animate({
     scrollTop: destination,
   }, 0);
